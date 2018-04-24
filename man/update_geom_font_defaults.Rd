@@ -5,10 +5,10 @@
 \title{Update matching font defaults for text geoms}
 \usage{
 update_geom_font_defaults(family = "Arial Narrow", face = "plain",
-  size = 3.5)
+  size = 3.5, color = "#2b2b2b")
 }
 \arguments{
-\item{family, face, size}{font family name, face and size}
+\item{family, face, size, color}{font family name, face, size and color}
 }
 \description{
 Updates [ggplot2::geom_label] and [ggplot2::geom_text] font defaults

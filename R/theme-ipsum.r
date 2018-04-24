@@ -1,5 +1,7 @@
 #' A precise & pristine [ggplot2] theme with opinionated defaults and an emphasis on typography
 #'
+#' Also has a "dark" / "modern" version for the new RStudio theme
+#'
 #' @md
 #' @section Why Arial Narrow?:
 #' First and foremost, Arial Narrow is generally installed by default or readily
@@ -18,6 +20,11 @@
 #' usually only arises when using a newer font with many weights but somewhat
 #' irregular internal font name patterns.
 #'
+#' There is an option `hrbrthemes.loadfonts` which -- if set to `TRUE` -- will
+#' call `extrafont::loadfonts()` to register non-core fonts with R PDF & PostScript
+#' devices. If you are running under Windows, the package calls the same function
+#' to register non-core fonts with the Windows graphics device.
+#'
 #' @md
 #' @param base_family,base_size base font family and size
 #' @param plot_title_family,plot_title_face,plot_title_size,plot_title_margin plot title family, face, size and margi
@@ -28,7 +35,9 @@
 #' @param axis_title_family,axis_title_face,axis_title_size axis title font family, face and size
 #' @param axis_title_just axis title font justification, one of `[blmcrt]`
 #' @param plot_margin plot margin (specify with [ggplot2::margin])
+#' @param grid_col,axis_col grid & axis colors; both default to `#cccccc`
 #' @param grid panel grid (`TRUE`, `FALSE`, or a combination of `X`, `x`, `Y`, `y`)
+#' @param axis_text_size font size of axis text
 #' @param axis add x or y axes? `TRUE`, `FALSE`, "`xy`"
 #' @param ticks ticks if `TRUE` add ticks
 #' @export
@@ -60,7 +69,7 @@
 #'   theme_ipsum(grid="Y") +
 #'   theme(axis.text.y=element_blank())
 #' }
-theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
+theme_ipsum <- function(base_family="Arial Narrow", base_size = 11.5,
                         plot_title_family=base_family, plot_title_size = 18,
                         plot_title_face="bold", plot_title_margin = 10,
                         subtitle_family=base_family, subtitle_size = 12,
@@ -69,10 +78,12 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
                         strip_text_face = "plain",
                         caption_family = base_family, caption_size = 9,
                         caption_face = "italic", caption_margin = 10,
+                        axis_text_size = base_size,
                         axis_title_family = subtitle_family, axis_title_size = 9,
                         axis_title_face = "plain", axis_title_just = "rt",
                         plot_margin = margin(30, 30, 30, 30),
-                        grid = TRUE, axis = FALSE, ticks = FALSE) {
+                        grid_col = "#cccccc", grid = TRUE,
+                        axis_col = "#cccccc", axis = FALSE, ticks = FALSE) {
 
   ret <- ggplot2::theme_minimal(base_family=base_family, base_size=base_size)
 
@@ -81,9 +92,9 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
 
   if (inherits(grid, "character") | grid == TRUE) {
 
-    ret <- ret + theme(panel.grid=element_line(color="#2b2b2bdd", size=0.10))
-    ret <- ret + theme(panel.grid.major=element_line(color="#2b2b2b99", size=0.10))
-    ret <- ret + theme(panel.grid.minor=element_line(color="#2b2b2b99", size=0.05))
+    ret <- ret + theme(panel.grid=element_line(color=grid_col, size=0.2))
+    ret <- ret + theme(panel.grid.major=element_line(color=grid_col, size=0.2))
+    ret <- ret + theme(panel.grid.minor=element_line(color=grid_col, size=0.15))
 
     if (inherits(grid, "character")) {
       if (regexpr("X", grid)[1] < 0) ret <- ret + theme(panel.grid.major.x=element_blank())
@@ -103,16 +114,16 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
       if (regexpr("x", axis)[1] < 0) {
         ret <- ret + theme(axis.line.x=element_blank())
       } else {
-        ret <- ret + theme(axis.line.x=element_line(color="#2b2b2b", size=0.15))
+        ret <- ret + theme(axis.line.x=element_line(color=axis_col, size=0.15))
       }
       if (regexpr("y", axis)[1] < 0) {
         ret <- ret + theme(axis.line.y=element_blank())
       } else {
-        ret <- ret + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+        ret <- ret + theme(axis.line.y=element_line(color=axis_col, size=0.15))
       }
     } else {
-      ret <- ret + theme(axis.line.x=element_line(color="#2b2b2b", size=0.15))
-      ret <- ret + theme(axis.line.y=element_line(color="#2b2b2b", size=0.15))
+      ret <- ret + theme(axis.line.x=element_line(color=axis_col, size=0.15))
+      ret <- ret + theme(axis.line.y=element_line(color=axis_col, size=0.15))
     }
   } else {
     ret <- ret + theme(axis.line=element_blank())
@@ -132,17 +143,18 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
   xj <- switch(tolower(substr(axis_title_just, 1, 1)), b=0, l=0, m=0.5, c=0.5, r=1, t=1)
   yj <- switch(tolower(substr(axis_title_just, 2, 2)), b=0, l=0, m=0.5, c=0.5, r=1, t=1)
 
-  ret <- ret + theme(axis.text.x=element_text(margin=margin(t=0)))
-  ret <- ret + theme(axis.text.y=element_text(margin=margin(r=0)))
+  ret <- ret + theme(axis.text.x=element_text(size=axis_text_size, margin=margin(t=0)))
+  ret <- ret + theme(axis.text.y=element_text(size=axis_text_size, margin=margin(r=0)))
   ret <- ret + theme(axis.title=element_text(size=axis_title_size, family=axis_title_family))
   ret <- ret + theme(axis.title.x=element_text(hjust=xj, size=axis_title_size,
                                                family=axis_title_family, face=axis_title_face))
   ret <- ret + theme(axis.title.y=element_text(hjust=yj, size=axis_title_size,
                                                family=axis_title_family, face=axis_title_face))
+  ret <- ret + theme(axis.title.y.right=element_text(hjust=yj, size=axis_title_size, angle=90,
+                                                     family=axis_title_family, face=axis_title_face))
   ret <- ret + theme(strip.text=element_text(hjust=0, size=strip_text_size,
                                              face=strip_text_face, family=strip_text_family))
-  ret <- ret + theme(panel.spacing.x=grid::unit(2, "lines"))
-  ret <- ret + theme(panel.spacing.y=grid::unit(2, "lines"))
+  ret <- ret + theme(panel.spacing=grid::unit(2, "lines"))
   ret <- ret + theme(plot.title=element_text(hjust=0, size=plot_title_size,
                                              margin=margin(b=plot_title_margin),
                                              family=plot_title_family, face=plot_title_face))
@@ -162,11 +174,12 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 11,
 #'
 #' Updates [ggplot2::geom_label] and [ggplot2::geom_text] font defaults
 #'
-#' @param family,face,size font family name, face and size
+#' @param family,face,size,color font family name, face, size and color
 #' @export
-update_geom_font_defaults <- function(family="Arial Narrow", face="plain", size=3.5) {
-  update_geom_defaults("text", list(family=family, face=face, size=size))
-  update_geom_defaults("label", list(family=family, face=face, size=size))
+update_geom_font_defaults <- function(family="Arial Narrow", face="plain", size=3.5,
+                                      color = "#2b2b2b") {
+  update_geom_defaults("text", list(family=family, face=face, size=size, color=color))
+  update_geom_defaults("label", list(family=family, face=face, size=size, color=color))
 }
 
 #' @rdname ArialNarrow

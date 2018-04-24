@@ -11,12 +11,19 @@
 #' Narrow (the one on most systems, anyway) does not have said diversity but this
 #' quality is not (IMO) a "must have".
 #'
+#' There is an option `hrbrthemes.loadfonts` which -- if set to `TRUE` -- will
+#' call `extrafont::loadfonts()` to register non-core fonts with R PDF & PostScript
+#' devices. If you are running under Windows, the package calls the same function
+#' to register non-core fonts with the Windows graphics device.
+#'
 #' @md
 #' @name hrbrthemes
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
-#' @import ggplot2 grid scales extrafont hunspell stringi
-#' @importFrom purrr %>% map walk
+#' @import ggplot2 grid scales extrafont grDevices
+#' @importFrom magrittr %>%
+#' @import rmarkdown knitr htmltools
+#' @importFrom tools file_path_sans_ext
 NULL
 
 #' hrbrthemes exported operators

@@ -10,8 +10,10 @@
 #'
 #' @md
 #' @param gg ggplot2 object
-#' @param dict a dictionary object or string which can be passed to [hunspell::dictionary]
-#' @param ignore character vector with additional approved words added to the dictionary
+#' @param dict a dictionary object or string which can be passed to [hunspell::dictionary].
+#'     Defaults to `hunspell::dictionary("en_US")`
+#' @param ignore character vector with additional approved words added to the dictionary.
+#'     Defaults to `hunspell::en_stats`
 #' @return the object that was passed in
 #' @export
 #' @examples
@@ -28,7 +30,13 @@
 #'        caption="This is a captien") -> gg
 #'
 #' gg_check(gg)
-gg_check <- function(gg, dict = hunspell::dictionary("en_US"), ignore = hunspell::en_stats) {
+gg_check <- function(gg, dict, ignore) {
+
+  try_require("hunspell", "hunspell")
+  try_require("stringi", "stri_extract_all_words")
+
+  if (missing(dict)) dict <- hunspell::dictionary("en_US")
+  if (missing(ignore)) ignore <- hunspell::en_stats
 
   if (inherits(gg, "labels")) {
     lbl <- gg
@@ -40,16 +48,17 @@ gg_check <- function(gg, dict = hunspell::dictionary("en_US"), ignore = hunspell
 
   if (length(lbl) > 0) {
 
-    purrr::walk(names(lbl), function(lab) {
+    tmp <- lapply(names(lbl), function(lab) {
 
-      words <- stri_extract_all_words(lbl[[lab]])
-      words <- unlist(words)
-      words <- purrr::discard(hunspell(words, "text", dict = dict, ignore = ignore),
-                              ~length(.)==0)
-
-      if (length(words) > 0) {
-        message(sprintf("Possible misspelled words in [%s]: (%s)",
-                        lab, paste0(words, collapse=", ")))
+      if (length(lbl[[lab]]) > 0) {
+        words <- stringi::stri_extract_all_words(lbl[[lab]])
+        words <- unlist(words)
+        w_tmp <- hunspell::hunspell(words, "text", dict = dict, ignore = ignore)
+        words <- w_tmp[which(sapply(w_tmp, length) > 0)]
+        if (length(words) > 0) {
+          message(sprintf("Possible misspelled words in [%s]: (%s)",
+                          lab, paste0(words, collapse=", ")))
+        }
       }
 
     })

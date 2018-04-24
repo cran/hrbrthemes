@@ -1,4 +1,4 @@
-context("basic functionality")
+context("core theme components work")
 test_that("we can do something", {
 
   library(purrr)
@@ -56,20 +56,21 @@ test_that("we can do something", {
   invisible(theme_ipsum(axis=""))
   invisible(theme_ipsum_rc(axis=""))
 
-  invisible(update_geom_font_defaults())
-  invisible(import_roboto_condensed())
+  # invisible(update_geom_font_defaults())
+  # invisible(theme_ipsum(ticks=TRUE))
+  # invisible(import_roboto_condensed())
+  # invisible(theme_ipsum_rc(ticks=TRUE))
 
-  invisible(theme_ipsum(ticks=TRUE))
-  invisible(theme_ipsum_rc(ticks=TRUE))
-
-  expect_that(tmp_x1$expand, equals(c(0,0)))
-  expect_that(tmp_x2$expand, equals(c(0,0)))
-  expect_that(tmp_y1$expand, equals(c(0,0)))
-  expect_that(tmp_y2$expand, equals(c(0,0)))
+  expect_that(tmp_x1$expand, equals(c(0.01,0)))
+  expect_that(tmp_x2$expand, equals(c(0.01,0)))
+  expect_that(tmp_y1$expand, equals(c(0.01,0)))
+  expect_that(tmp_y2$expand, equals(c(0.01,0)))
 
   expect_that(ipsum_pal()(1), equals("#d18975"))
   expect_that(col$palette(1), equals("#d18975"))
   expect_that(fil$palette(1), equals("#d18975"))
 
-})
+  testthat::skip_on_cran()
+  invisible(import_roboto_condensed())
 
+})
