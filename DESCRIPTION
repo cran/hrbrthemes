@@ -1,7 +1,7 @@
 Package: hrbrthemes
 Type: Package
 Title: Additional Themes, Theme Components and Utilities for 'ggplot2'
-Version: 0.5.0
+Version: 0.5.0.1
 Date: 2018-04-24
 Authors@R: c(
       person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
@@ -18,7 +18,7 @@ Authors@R: c(
       person("Thomas J.", "Leeper", role = c("ctb"), email = "thosjleeper@gmail.com",
              comment = c(ORCID = "0000-0003-4097-6326"))
     )
-Maintainer: Bob Rudis <bob@rud.is>
+Maintainer: ORPHANED
 Description: A compilation of extra 'ggplot2' themes, scales and utilities, including a 
     spell check function for plot label fields and an overall emphasis on typography. 
     A copy of the 'Google' font 'Roboto Condensed' <https://github.com/google/roboto/> 
@@ -31,14 +31,14 @@ Copyright: file inst/COPYRIGHTS
 License: MIT + file LICENSE
 Encoding: UTF-8
 Suggests: testthat, dplyr, gridExtra, hunspell, stringi, gcookbook,
-        clipr, vdiffr, svglite
+        clipr, vdiffr, svglite, gdtools, purrr
 Depends: R (>= 3.2.0)
 Imports: ggplot2 (>= 2.2.1), grDevices, grid, scales, extrafont, knitr,
         rmarkdown, htmltools, tools, magrittr
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-04-24 14:51:26 UTC; hrbrmstr
+Packaged: 2018-08-19 08:39:11 UTC; hornik
 Author: Bob Rudis [aut, cre] (<https://orcid.org/0000-0001-5670-2640>),
   Patrick Kennedy [ctb],
   Philipp Reiner [ctb],
@@ -49,4 +49,7 @@ Author: Bob Rudis [aut, cre] (<https://orcid.org/0000-0001-5670-2640>),
   Jacob Barnett [ctb],
   Thomas J. Leeper [ctb] (<https://orcid.org/0000-0003-4097-6326>)
 Repository: CRAN
-Date/Publication: 2018-04-24 17:42:55 UTC
+Date/Publication: 2018-08-19 08:51:32 UTC
+X-CRAN-Original-Maintainer: Bob Rudis <bob@rud.is>
+X-CRAN-Comment: Orphaned and corrected on 2018-08-19 as check problems
+        were not corrected despite reminders.
