@@ -1,21 +1,58 @@
+#' FT color palette
+#'
+#' @md
+#' @note don't forget you can use [scales::alpha()] with these colors
+#' @docType data
+#' @export
+list(
+slate = "#617a89",
+blue = "#0b53c1",
+red = "#ff0055",
+green = "#b3e93e",
+gray = "#909495",
+yellow = "#ffec1b",
+peach = "#fba29d",
+light_blue = "#23d0fc",
+white = "#ffffff"
+) -> ft_cols
+
+#' @rdname ft_cols
+#' @docType data
+#' @export
+ft_text_col <- "#929299"
+
 #' @inheritParams hrbrthemes::theme_ipsum_rc
 #' @rdname theme_ipsum_rc
 #' @export
-theme_modern_rc <- function (base_family = "Roboto Condensed", base_size = 11.5,
-          plot_title_family = base_family, plot_title_size = 18, plot_title_face = "bold",
-          plot_title_margin = 10, subtitle_family = if (.Platform$OS.type ==
-                                                        "windows") "Roboto Condensed" else "Roboto Condensed Light",
-          subtitle_size = 13, subtitle_face = "plain", subtitle_margin = 15,
-          strip_text_family = base_family, strip_text_size = 12, strip_text_face = "plain",
+theme_ft_rc <- function (base_family = "Roboto Condensed", base_size = 11.5,
+          plot_title_family = base_family,
+          plot_title_size = 18,
+          plot_title_face = "bold",
+          plot_title_margin = 10,
+          subtitle_family = if (.Platform$OS.type == "windows") "Roboto Condensed" else "Roboto Condensed Light",
+          subtitle_size = 13,
+          subtitle_face = "plain",
+          subtitle_margin = 15,
+          strip_text_family = base_family,
+          strip_text_size = 12,
+          strip_text_face = "plain",
           caption_family = if (.Platform$OS.type == "windows") "Roboto Condensed" else "Roboto Condensed Light",
-          caption_size = 9, caption_face = "plain", caption_margin = 10,
-          axis_text_size = base_size, axis_title_family = base_family,
-          axis_title_size = 9, axis_title_face = "plain", axis_title_just = "rt",
-          plot_margin = margin(30, 30, 30, 30), grid = TRUE, axis = FALSE, ticks = FALSE)  {
+          caption_size = 9,
+          caption_face = "plain",
+          caption_margin = 10,
+          axis_text_size = base_size,
+          axis_title_family = base_family,
+          axis_title_size = 9,
+          axis_title_face = "plain",
+          axis_title_just = "rt",
+          plot_margin = margin(30, 30, 30, 30),
+          grid = TRUE, axis = FALSE, ticks = FALSE)  {
 
-  grid_col <- axis_col <- "#333333"
+  grid_col <- axis_col <- "#464950"
 
-  def_fore <- "#57c1f1"
+  subtitle_col <- ft_text_col
+
+  def_fore <- "#617a89"
 
   ggplot2::update_geom_defaults("point", list(colour = def_fore))
   ggplot2::update_geom_defaults("line", list(colour = def_fore))
@@ -24,7 +61,7 @@ theme_modern_rc <- function (base_family = "Roboto Condensed", base_size = 11.5,
   ggplot2::update_geom_defaults("density", list(colour = def_fore, fill=def_fore))
   ggplot2::update_geom_defaults("bar", list(colour = def_fore, fill=def_fore))
   ggplot2::update_geom_defaults("col", list(colour = def_fore, fill=def_fore))
-  ggplot2::update_geom_defaults("text", list(colour = def_fore))
+  ggplot2::update_geom_defaults("text", list(colour = ft_text_col))
 
   ret <- ggplot2::theme_minimal(base_family=base_family, base_size=base_size)
 
@@ -92,52 +129,92 @@ theme_modern_rc <- function (base_family = "Roboto Condensed", base_size = 11.5,
   ret <- ret + theme(axis.title.y=element_text(hjust=yj, size=axis_title_size,
                                                family=axis_title_family, face=axis_title_face))
   ret <- ret + theme(strip.text=element_text(hjust=0, size=strip_text_size,
+                                             color = subtitle_col,
                                              face=strip_text_face, family=strip_text_family))
   ret <- ret + theme(panel.spacing=grid::unit(2, "lines"))
   ret <- ret + theme(plot.title=element_text(hjust=0, size=plot_title_size,
                                              margin=margin(b=plot_title_margin),
                                              family=plot_title_family, face=plot_title_face))
   ret <- ret + theme(plot.subtitle=element_text(hjust=0, size=subtitle_size,
-                                                margin=margin(b=subtitle_margin),
-                                                family=subtitle_family, face=subtitle_face))
+                                                color = subtitle_col,
+                                                margin = margin(b = subtitle_margin),
+                                                family = subtitle_family, face = subtitle_face))
   ret <- ret + theme(plot.caption=element_text(hjust=1, size=caption_size,
                                                margin=margin(t=caption_margin),
                                                family=caption_family, face=caption_face))
   ret <- ret + theme(plot.margin=plot_margin)
 
-  bkgrnd <- "#1e1e1e"
-  fgrnd <- "#e0e0e0"
+  bkgrnd <- "#252a32"
+  fgrnd <- "#617a89"
 
   ret <- ret +
     theme(rect =  element_rect(fill = bkgrnd, color = bkgrnd)) +
     theme(plot.background = element_rect(fill = bkgrnd, color = bkgrnd)) +
     theme(panel.background = element_rect(fill = bkgrnd, color = bkgrnd)) +
     theme(rect =  element_rect(fill = bkgrnd, color = bkgrnd)) +
-    theme(text =  element_text(color = fgrnd)) +
-    theme(axis.text =  element_text(color = fgrnd)) +
-    theme(title =  element_text(color = "white")) +
+    theme(text =  element_text(color = ft_text_col)) +
+    theme(axis.text =  element_text(color = ft_text_col)) +
+    theme(title =  element_text(color = ft_text_col)) +
     theme(plot.title =  element_text(color = "white")) +
-    theme(plot.subtitle =  element_text(color = "#8e8e93")) +
-    theme(line = element_line(color = fgrnd)) +
-    theme(axis.ticks = element_line(color = fgrnd))
+    theme(plot.subtitle =  element_text(color = ft_text_col)) +
+    theme(plot.caption =  element_text(color = ft_text_col)) +
+    theme(line = element_line(color = grid_col)) +
+    theme(axis.ticks = element_line(color = grid_col))
 
   ret
 
 }
-#' Change geom defaults from black to white for the modern theme
+#' Change geom defaults from black to custom lights for the FT theme
 #'
 #' @export
-modern_geom_defaults <- function() {
+ft_geom_defaults <- function() {
 
   geoms <- c("abline", "area", "bar", "boxplot", "col", "crossbar",
              "density", "dotplot", "errorbar", "errorbar",
-             "hline", "label", "line", "linerange",
+             "hline", "line", "linerange",
              "map", "path", "point", "polygon", "rect", "ribbon", "rug", "segment",
-             "step", "text", "tile", "violin", "vline")
+             "step", "tile", "violin", "vline")
 
   for (g in geoms) {
-    message(g)
-    update_geom_defaults(g, list(colour = "white", fill = "white"))
+    update_geom_defaults(g, list(colour = "#617a89", fill = "#617a89"))
+  }
+
+  geoms <- c("text", "label")
+
+  for (g in geoms) {
+    update_geom_defaults(g, list(colour = ft_text_col, fill = "#252a32"))
   }
 
 }
+
+ft_palette <- c("#617a89", "#0b53c1", "#ff0055", "#b3e93e", "#909495", "#ffec1b", "#fba29d", "#23d0fc", "#ffffff")
+
+#' A bright qualitative color palette
+#'
+#' @export
+#' @examples
+#' library(scales)
+#' scales::show_col(ft_pal()(8))
+ft_pal <- function() {
+  ft_palette <- c("#617a89", "#0b53c1", "#ff0055", "#b3e93e", "#909495",
+                  "#ffec1b", "#fba29d", "#23d0fc", "#ffffff")
+  scales::manual_pal(ft_palette)
+}
+
+#' Discrete color & fill scales based on the FT palette
+#'
+#' See [ft_pal]().
+#'
+#' @md
+#' @inheritDotParams ggplot2::discrete_scale -expand -position
+#' @rdname scale_ft
+#' @export
+scale_colour_ft <- function(...) { ggplot2::discrete_scale("colour", "ft", ft_pal(), ...) }
+
+#' @export
+#' @rdname scale_ft
+scale_color_ft <- scale_colour_ft
+
+#' @export
+#' @rdname scale_ft
+scale_fill_ft <- function(...) { ggplot2::discrete_scale("fill", "ft", ft_pal(), ...) }

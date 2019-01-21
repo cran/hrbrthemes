@@ -1,3 +1,8 @@
+# hrbrthemes 0.6.0
+
+- new themes & fonts
+- doc fixes
+
 # hrbrthemes 0.5.0
 
 ## New Stuff
@@ -5,6 +10,7 @@
 * `flush_ticks()` for easier alignment of x/y axis labels
 * `ipsum_pdf` R Markdown format for using hrbrthemes in PDFs
 * `theme_ipsum_tw()` (+ fonts) a Titillium Web-based theme
+* Updated theme\_modern\_rc()
 
 # hrbrthemes 0.3.2
 

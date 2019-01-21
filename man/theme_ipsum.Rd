@@ -13,9 +13,10 @@ theme_ipsum(base_family = "Arial Narrow", base_size = 11.5,
   strip_text_face = "plain", caption_family = base_family,
   caption_size = 9, caption_face = "italic", caption_margin = 10,
   axis_text_size = base_size, axis_title_family = subtitle_family,
-  axis_title_size = 9, axis_title_face = "plain", axis_title_just = "rt",
-  plot_margin = margin(30, 30, 30, 30), grid_col = "#cccccc", grid = TRUE,
-  axis_col = "#cccccc", axis = FALSE, ticks = FALSE)
+  axis_title_size = 9, axis_title_face = "plain",
+  axis_title_just = "rt", plot_margin = margin(30, 30, 30, 30),
+  grid_col = "#cccccc", grid = TRUE, axis_col = "#cccccc",
+  axis = FALSE, ticks = FALSE)
 }
 \arguments{
 \item{base_family, base_size}{base font family and size}
@@ -36,7 +37,7 @@ theme_ipsum(base_family = "Arial Narrow", base_size = 11.5,
 
 \item{axis_title_just}{axis title font justification, one of \code{[blmcrt]}}
 
-\item{plot_margin}{plot margin (specify with \link[ggplot2:margin]{ggplot2::margin})}
+\item{plot_margin}{plot margin (specify with \code{\link[ggplot2:margin]{ggplot2::margin()}})}
 
 \item{grid_col, axis_col}{grid & axis colors; both default to \code{#cccccc}}
 

@@ -1,8 +1,8 @@
 Package: hrbrthemes
 Type: Package
 Title: Additional Themes, Theme Components and Utilities for 'ggplot2'
-Version: 0.5.0.1
-Date: 2018-04-24
+Version: 0.6.0
+Date: 2019-01-20
 Authors@R: c(
       person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
              comment = c(ORCID = "0000-0001-5670-2640")),
@@ -16,9 +16,10 @@ Authors@R: c(
       person("IBM", comment = "Plex Sans Font", role = c("cph")),
       person("Jacob", "Barnett", email = "jacob.r.barnett@gmail.com", role = c("ctb")),
       person("Thomas J.", "Leeper", role = c("ctb"), email = "thosjleeper@gmail.com",
-             comment = c(ORCID = "0000-0003-4097-6326"))
+             comment = c(ORCID = "0000-0003-4097-6326")),
+      person("Joris", "Meys", email = "Joris.Meys@UGent.be", role = c("ctb"))
     )
-Maintainer: ORPHANED
+Maintainer: Bob Rudis <bob@rud.is>
 Description: A compilation of extra 'ggplot2' themes, scales and utilities, including a 
     spell check function for plot label fields and an overall emphasis on typography. 
     A copy of the 'Google' font 'Roboto Condensed' <https://github.com/google/roboto/> 
@@ -31,14 +32,14 @@ Copyright: file inst/COPYRIGHTS
 License: MIT + file LICENSE
 Encoding: UTF-8
 Suggests: testthat, dplyr, gridExtra, hunspell, stringi, gcookbook,
-        clipr, vdiffr, svglite, gdtools, purrr
+        clipr, vdiffr, svglite
 Depends: R (>= 3.2.0)
 Imports: ggplot2 (>= 2.2.1), grDevices, grid, scales, extrafont, knitr,
-        rmarkdown, htmltools, tools, magrittr
-RoxygenNote: 6.0.1.9000
+        rmarkdown, htmltools, tools, magrittr, gdtools
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-08-19 08:39:11 UTC; hornik
+Packaged: 2019-01-20 22:45:00 UTC; bob
 Author: Bob Rudis [aut, cre] (<https://orcid.org/0000-0001-5670-2640>),
   Patrick Kennedy [ctb],
   Philipp Reiner [ctb],
@@ -47,9 +48,7 @@ Author: Bob Rudis [aut, cre] (<https://orcid.org/0000-0001-5670-2640>),
   Google [cph] (Roboto Condensed & Titillium Web Fonts),
   IBM [cph] (Plex Sans Font),
   Jacob Barnett [ctb],
-  Thomas J. Leeper [ctb] (<https://orcid.org/0000-0003-4097-6326>)
+  Thomas J. Leeper [ctb] (<https://orcid.org/0000-0003-4097-6326>),
+  Joris Meys [ctb]
 Repository: CRAN
-Date/Publication: 2018-08-19 08:51:32 UTC
-X-CRAN-Original-Maintainer: Bob Rudis <bob@rud.is>
-X-CRAN-Comment: Orphaned and corrected on 2018-08-19 as check problems
-        were not corrected despite reminders.
+Date/Publication: 2019-01-21 09:10:03 UTC
