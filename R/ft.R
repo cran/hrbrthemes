@@ -21,7 +21,6 @@ white = "#ffffff"
 #' @export
 ft_text_col <- "#929299"
 
-#' @inheritParams hrbrthemes::theme_ipsum_rc
 #' @rdname theme_ipsum_rc
 #' @export
 theme_ft_rc <- function (base_family = "Roboto Condensed", base_size = 11.5,
@@ -203,7 +202,7 @@ ft_pal <- function() {
 
 #' Discrete color & fill scales based on the FT palette
 #'
-#' See [ft_pal]().
+#' See [ft_pal()].
 #'
 #' @md
 #' @inheritDotParams ggplot2::discrete_scale -expand -position
